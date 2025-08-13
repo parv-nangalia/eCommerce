@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: auth-service
@@ -24,11 +27,12 @@ logging:
       springframework:
         security: DEBUG
 
-jwt:
-  secret: 2sVJHh3NfGTsYvXqBdQkUtGFyFBN5bl6MQTeIQ0D0e8=
-  expiration: 3600000
-
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+jwt:
+  secret: 2sVJHh3NfGTsYvXqBdQkUtGFyFBN5bl6MQTeIQ0D0e8=
+  expiration: 3600000
+
