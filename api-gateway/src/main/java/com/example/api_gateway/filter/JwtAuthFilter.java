@@ -35,7 +35,8 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // Bypass authentication for the login endpoint
         String path = exchange.getRequest().getURI().getPath();
-        if (path.equals("/auth/")) {
+        System.out.println("path: " + path);
+        if (path.startsWith("/api/auth/")) {
             System.out.println("Bypassing authentication for path: " + path); // Added for logging
             return chain.filter(exchange);
         }

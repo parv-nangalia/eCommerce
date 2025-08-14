@@ -10,7 +10,7 @@ spring:
         - id: auth-service
           uri: lb://AUTH-SERVICE
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
 
         # All other services are secured
         - id: product-service

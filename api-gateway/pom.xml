@@ -16,8 +16,11 @@
 
 	<properties>
 		<java.version>21</java.version>
-		<!-- Updated Spring Cloud version for better compatibility with Spring Boot 3.3.1 -->
 		<spring-cloud.version>2023.0.6</spring-cloud.version>
+		<!-- Define Spring Framework versions explicitly to prevent conflicts -->
+		<spring-framework.version>6.1.10</spring-framework.version>
+		<reactor-core.version>3.6.7</reactor-core.version> <!-- Ensure consistent Reactor Core version -->
+		<reactor-netty.version>1.1.20</reactor-netty.version> <!-- Ensure consistent Reactor Netty version -->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -68,6 +71,43 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<!-- Explicitly manage Spring Framework core dependencies -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webflux</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jcl</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+			<!-- Explicitly manage Reactor versions as they are mentioned in the stack trace -->
+			<dependency>
+				<groupId>io.projectreactor</groupId>
+				<artifactId>reactor-core</artifactId>
+				<version>${reactor-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.projectreactor.netty</groupId>
+				<artifactId>reactor-netty-http</artifactId>
+				<version>${reactor-netty.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.projectreactor.netty</groupId>
+				<artifactId>reactor-netty-core</artifactId>
+				<version>${reactor-netty.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
