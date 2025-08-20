@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -22,13 +23,15 @@ import java.security.Key;
 @Component
 public class JwtAuthFilter implements GlobalFilter, Ordered {
 
-    private final String SHARED_SECRET_KEY;
+    
     private final Key signingKey; // Declare the Key once for efficiency
 
     public JwtAuthFilter(@Value("${jwt.secret}") String sharedSecretKey) {
-        this.SHARED_SECRET_KEY = sharedSecretKey;
+       
         // Initialize the Key in the constructor for the HMAC-SHA algorithm
-        this.signingKey = Keys.hmacShaKeyFor(this.SHARED_SECRET_KEY.getBytes());
+
+        byte[] keyBytes = Decoders.BASE64.decode(sharedSecretKey);
+        this.signingKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
     @Override
